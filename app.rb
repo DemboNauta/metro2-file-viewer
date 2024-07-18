@@ -25,8 +25,7 @@ class App
               file_path = open_file(window)
               if file_path
                 self.metro2file = Metro2File.new.from_file file_path
-                puts self.metro2file.header_str
-                puts self.metro2file.trailer_str
+                puts "Header: #{self.metro2file.get_header_info}"
               else
                 msg_box('File Selected', "No file selected.")
               end
