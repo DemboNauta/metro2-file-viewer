@@ -2,17 +2,21 @@
 
 require 'glimmer-dsl-libui'
 
+require_relative 'lib/metro2file.rb'
+
 class App
 
   include Glimmer
 
+  attr_accessor :metro2file
+
   def run
-    window('Hello, World!', 750, 500) {
+    window('Metro2 File Viewer', 750, 500) {
       margined true
 
-      label('Metro2 File Viewer')
-
       vertical_box {
+        padded true
+
         horizontal_box {
           stretchy false
 
@@ -20,7 +24,9 @@ class App
             on_clicked do
               file_path = open_file(window)
               if file_path
-                msg_box('File Selected', "File path: #{file_path}")
+                self.metro2file = Metro2File.new.from_file file_path
+                puts self.metro2file.header_str
+                puts self.metro2file.trailer_str
               else
                 msg_box('File Selected', "No file selected.")
               end
