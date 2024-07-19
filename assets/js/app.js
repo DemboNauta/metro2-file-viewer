@@ -145,71 +145,78 @@ class Metro2File {
                 postalCode: record.slice(415, 424),
                 addressIndicator: record.slice(424, 425),
                 residenceCode: record.slice(425, 426),
-                j1SegmentIdentifier: null,
-                j1ConsumerTransactionType: null,
-                j1Surname: null,
-                j1FirstName: null,
-                j1MiddleName: null,
-                j1GenerationCode: null,
-                j1SocialSecurityNumber: null,
-                j1DateOfBirth: null,
-                j1TelephoneNumber: null,
-                j1EcoaCode: null,
-                j1ConsumerInformationIndicator: null,
-                j2SegmentIdentifier: null,
-                j2ConsumerTransactionType: null,
-                j2Surname: null,
-                j2FirstName: null,
-                j2MiddleName: null,
-                j2GenerationCode: null,
-                j2SocialSecurityNumber: null,
-                j2DateOfBirth: null,
-                j2TelephoneNumber: null,
-                j2EcoaCode: null,
-                j2ConsumerInformationIndicator: null,
-                j2CountryCode: null,
-                j2FirstLineAddress: null,
-                j2SecondLineAddress: null,
-                j2City: null,
-                j2State: null,
-                j2PostalCode: null,
-                j2AddressIndicator: null,
-                j2ResidenceCode: null,
+                segmentIdentifierJ1: null,
+                consumerTransactionTypeJ1: null,
+                surnameJ1: null,
+                firstNameJ1: null,
+                middleNameJ1: null,
+                generationCodeJ1: null,
+                socialSecurityNumberJ1: null,
+                dateOfBirthJ1: null,
+                telephoneNumberJ1: null,
+                ecoaCodeJ1: null,
+                consumerInformationIndicatorJ1: null,
+                segmentIdentifierJ2: null,
+                consumerTransactionTypeJ2: null,
+                surnameJ2: null,
+                firstNameJ2: null,
+                middleNameJ2: null,
+                generationCodeJ2: null,
+                socialSecurityNumberJ2: null,
+                dateOfBirthJ2: null,
+                telephoneNumberJ2: null,
+                ecoaCodeJ2: null,
+                consumerInformationIndicatorJ2: null,
+                countryCodeJ2: null,
+                firstLineAddressJ2: null,
+                secondLineAddressJ2: null,
+                cityJ2: null,
+                stateJ2: null,
+                postalCodeJ2: null,
+                addressIndicatorJ2: null,
+                residenceCodeJ2: null,
             };
 
-            // add j1 and j2 fields if the record is a consumer segment
+            // add J1 and J2 fields if the record is a consumer segment
             if (recordObj.recordDescriptor === '0526') {
-                recordObj.j1SegmentIdentifier = record.slice(426, 428);
-                recordObj.j1ConsumerTransactionType = record.slice(428, 429);
-                recordObj.j1Surname = record.slice(429, 454);
-                recordObj.j1FirstName = record.slice(454, 474);
-                recordObj.j1MiddleName = record.slice(474, 494);
-                recordObj.j1GenerationCode = record.slice(494, 495);
-                recordObj.j1SocialSecurityNumber = record.slice(495, 504);
-                recordObj.j1DateOfBirth = parseMetro2Date(record.slice(504, 512));
-                recordObj.j1TelephoneNumber = record.slice(512, 522);
-                recordObj.j1EcoaCode = record.slice(522, 523);
-                recordObj.j1ConsumerInformationIndicator = record.slice(523, 525);
+                recordObj.segmentIdentifierJ1 = record.slice(426, 428);
+                recordObj.consumerTransactionTypeJ1 = record.slice(428, 429);
+                recordObj.surnameJ1 = record.slice(429, 454);
+                recordObj.firstNameJ1 = record.slice(454, 474);
+                recordObj.middleNameJ1 = record.slice(474, 494);
+                recordObj.generationCodeJ1 = record.slice(494, 495);
+                recordObj.socialSecurityNumberJ1 = record.slice(495, 504);
+                recordObj.dateOfBirthJ1 = parseMetro2Date(record.slice(504, 512));
+                recordObj.telephoneNumberJ1 = record.slice(512, 522);
+                recordObj.ecoaCodeJ1 = record.slice(522, 523);
+                recordObj.consumerInformationIndicatorJ1 = record.slice(523, 525);
             } else if (recordObj.recordDescriptor === '0626') {
-                recordObj.j2SegmentIdentifier = record.slice(426, 428);
-                recordObj.j2ConsumerTransactionType = record.slice(428, 429);
-                recordObj.j2Surname = record.slice(429, 454);
-                recordObj.j2FirstName = record.slice(454, 474);
-                recordObj.j2MiddleName = record.slice(474, 494);
-                recordObj.j2GenerationCode = record.slice(494, 495);
-                recordObj.j2SocialSecurityNumber = record.slice(495, 504);
-                recordObj.j2DateOfBirth = parseMetro2Date(record.slice(504, 512));
-                recordObj.j2TelephoneNumber = record.slice(512, 522);
-                recordObj.j2EcoaCode = record.slice(522, 523);
-                recordObj.j2ConsumerInformationIndicator = record.slice(523, 525);
-                recordObj.j2CountryCode = record.slice(525, 527);
-                recordObj.j2FirstLineAddress = record.slice(527, 559);
-                recordObj.j2SecondLineAddress = record.slice(559, 591);
-                recordObj.j2City = record.slice(591, 611);
-                recordObj.j2State = record.slice(611, 613);
-                recordObj.j2PostalCode = record.slice(613, 622);
-                recordObj.j2AddressIndicator = record.slice(622, 623);
-                recordObj.j2ResidenceCode = record.slice(623, 624);
+                recordObj.segmentIdentifierJ2 = record.slice(426, 428);
+                recordObj.consumerTransactionTypeJ2 = record.slice(428, 429);
+                recordObj.surnameJ2 = record.slice(429, 454);
+                recordObj.firstNameJ2 = record.slice(454, 474);
+                recordObj.middleNameJ2 = record.slice(474, 494);
+                recordObj.generationCodeJ2 = record.slice(494, 495);
+                recordObj.socialSecurityNumberJ2 = record.slice(495, 504);
+                recordObj.dateOfBirthJ2 = parseMetro2Date(record.slice(504, 512));
+                recordObj.telephoneNumberJ2 = record.slice(512, 522);
+                recordObj.ecoaCodeJ2 = record.slice(522, 523);
+                recordObj.consumerInformationIndicatorJ2 = record.slice(523, 525);
+                recordObj.countryCodeJ2 = record.slice(525, 527);
+                recordObj.firstLineAddressJ2 = record.slice(527, 559);
+                recordObj.secondLineAddressJ2 = record.slice(559, 591);
+                recordObj.cityJ2 = record.slice(591, 611);
+                recordObj.stateJ2 = record.slice(611, 613);
+                recordObj.postalCodeJ2 = record.slice(613, 622);
+                recordObj.addressIndicatorJ2 = record.slice(622, 623);
+                recordObj.residenceCodeJ2 = record.slice(623, 624);
+            }
+
+            // trim extra whitespace from each object value if it is a string
+            for (let key in recordObj) {
+                if (typeof recordObj[key] === 'string') {
+                    recordObj[key] = recordObj[key].trim();
+                }
             }
 
             // trim extra whitespace from each object value if it is a string
@@ -314,7 +321,72 @@ const displayTrailerInfo = trailer => {
 }
 
 const displayRecordsInfo = records => {
-    console.log(records);
+    const recordsInfo = document.getElementById('records-content');
+
+    // remove all previous record info
+    while (recordsInfo.firstChild) {
+        recordsInfo.removeChild(recordsInfo.firstChild);
+    }
+
+    // display record info
+    const recordsTitle = document.createElement('h2');
+    recordsTitle.classList.add('mt-5');
+    recordsTitle.innerText = 'Metro2 File Records';
+    recordsInfo.appendChild(recordsTitle);
+
+    const recordsContainer = document.createElement('div');
+    recordsContainer.classList.add('records-container');
+    recordsContainer.style.overflow = 'auto';
+    recordsContainer.style.maxHeight = 'calc(100vh - 350px)';
+    recordsInfo.appendChild(recordsContainer);
+
+    const recordsTable = document.createElement('table');
+    recordsTable.classList.add('table', 'table-striped', 'table-hover', 'table-sm');
+    recordsContainer.appendChild(recordsTable);
+
+    const recordsHead = document.createElement('thead');
+    recordsTable.appendChild(recordsHead);
+
+    const recordsHeadRow = document.createElement('tr');
+    recordsHead.appendChild(recordsHeadRow);
+
+    // create a header for each field in the record
+    for (let key in records[0]) {
+        const keyHead = document.createElement('th');
+        const keyWords = key.split(/(?<=[a-z])(?=[A-Z0-9])/);
+        let keyTitle = keyWords.join(' ');
+        keyTitle = keyTitle.replace(/\b\w/g, char => char.toUpperCase());
+        keyHead.innerText = keyTitle;
+        keyHead.classList.add('mx-3', 'px-3', 'text-nowrap');
+        recordsHeadRow.appendChild(keyHead);
+    }
+
+    const recordsBody = document.createElement('tbody');
+    recordsBody.classList.add('table-body', 'table-group-divider');
+    recordsTable.appendChild(recordsBody);
+
+    // create a row for each record
+    records.forEach(record => {
+        const row = document.createElement('tr');
+        recordsBody.appendChild(row);
+
+        // create a cell for each field in the record
+        for (let key in record) {
+            const cell = document.createElement('td');
+            cell.innerText = record[key];
+            cell.classList.add('mx-3', 'px-3', 'text-nowrap');
+            row.appendChild(cell);
+        }
+    });
+
+    // make the header column sticky
+    const tableContainer = recordsContainer.parentElement;
+    tableContainer.style.position = 'relative';
+
+    const tableHead = recordsTable.querySelector('thead');
+    tableHead.style.position = 'sticky';
+    tableHead.style.top = '0';
+    tableHead.style.zIndex = '1';
 }
 
 const parseMetro2File = fileContent => {
