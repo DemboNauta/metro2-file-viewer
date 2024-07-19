@@ -7,15 +7,13 @@ class Metro2File {
         this.trailerStr = trailer;
 
         this.parseHeader();
+        this.parseTrailer();
     }
 
     parseHeader() {
         const header = this.headerStr;
 
         const headerObj = {
-            recordDescriptorWord: header.slice(0, 4),
-            recordIdentifier: header.slice(4, 10),
-            cycleNumber: header.slice(10, 12),
             innovisProgramIdentifier: header.slice(12, 22),
             equifaxProgramIdentifier: header.slice(22, 32),
             experianProgramIdentifier: header.slice(32, 37),
@@ -38,6 +36,62 @@ class Metro2File {
 
         this.header = headerObj;
     }
+
+    parseTrailer() {
+        const trailer = this.trailerStr;
+
+        const trailerObj = {
+            totalBaseRecords: trailer.slice(12, 21),
+            totalStatusCodeDF: trailer.slice(29, 38),
+            totalConsumerSegmentsJ1: trailer.slice(38, 47),
+            totalConsumerSegmentsJ2: trailer.slice(47, 56),
+            blockCount: trailer.slice(56, 65),
+            totalStatusCodeDA: trailer.slice(65, 74),
+            totalStatusCode05: trailer.slice(74, 83),
+            totalStatusCode11: trailer.slice(83, 92),
+            totalStatusCode13: trailer.slice(92, 101),
+            totalStatusCode61: trailer.slice(101, 110),
+            totalStatusCode62: trailer.slice(110, 119),
+            totalStatusCode63: trailer.slice(119, 128),
+            totalStatusCode64: trailer.slice(128, 137),
+            totalStatusCode65: trailer.slice(137, 146),
+            totalStatusCode71: trailer.slice(146, 155),
+            totalStatusCode78: trailer.slice(155, 164),
+            totalStatusCode80: trailer.slice(164, 173),
+            totalStatusCode82: trailer.slice(173, 182),
+            totalStatusCode83: trailer.slice(182, 191),
+            totalStatusCode84: trailer.slice(191, 200),
+            totalStatusCode88: trailer.slice(200, 209),
+            totalStatusCode89: trailer.slice(209, 218),
+            totalStatusCode93: trailer.slice(218, 227),
+            totalStatusCode94: trailer.slice(227, 236),
+            totalStatusCode95: trailer.slice(236, 245),
+            totalStatusCode96: trailer.slice(245, 254),
+            totalStatusCode97: trailer.slice(254, 263),
+            totalEcoaCodeZ: trailer.slice(263, 272),
+            totalEmploymentSegments: trailer.slice(272, 281),
+            totalOriginalCreditorSegments: trailer.slice(281, 290),
+            totalPurchaseSegments: trailer.slice(290, 299),
+            totalMortgageSegments: trailer.slice(299, 308),
+            totalPaymentSegments: trailer.slice(308, 317),
+            totalChangeSegments: trailer.slice(317, 326),
+            totalSocialSecurityNumbers: trailer.slice(326, 335),
+            totalSocialSecurityNumbersBase: trailer.slice(335, 344),
+            totalSocialSecurityNumbersJ1: trailer.slice(344, 353),
+            totalSocialSecurityNumbersJ2: trailer.slice(353, 362),
+            totalDatesOfBirth: trailer.slice(362, 371),
+            totalDatesOfBirthBase: trailer.slice(371, 380),
+            totalDatesOfBirthJ1: trailer.slice(380, 389),
+            totalDatesOfBirthJ2: trailer.slice(389, 398),
+            totalPhoneNumbers: trailer.slice(398, 407),
+        }
+
+        for (let key in trailerObj) {
+            trailerObj[key] = parseInt(trailerObj[key]);
+        }
+
+        this.trailer = trailerObj;
+    }
 }
 
 const fileInput = document.getElementById('file-input');
@@ -51,23 +105,10 @@ const parseMetro2Date = dateStr => {
     return `${month}/${day}/${year}`;
 }
 
-const displayHeaderInfo = header => {
-    const headerInfo = document.getElementById('header-content');
-
-    // remove all previous header info
-    while (headerInfo.firstChild) {
-        headerInfo.removeChild(headerInfo.firstChild);
-    }
-
-    // display header info
-    const headerTitle = document.createElement('h2');
-    headerTitle.innerText = 'Header Information';
-    headerInfo.appendChild(headerTitle);
-
-    // set up a bootstrap table to show the header info
+const createBootstrapTable = (parentEl, dataObj) => {
     const table = document.createElement('table');
     table.classList.add('table', 'table-striped', 'table-hover', 'table-sm');
-    headerInfo.appendChild(table);
+    parentEl.appendChild(table);
 
     const tableHead = document.createElement('thead');
     table.appendChild(tableHead);
@@ -87,21 +128,57 @@ const displayHeaderInfo = header => {
     tableBody.classList.add('table-body', 'table-group-divider');
     table.appendChild(tableBody);
 
-    for (let key in header) {
+    for (let key in dataObj) {
         const row = document.createElement('tr');
         tableBody.appendChild(row);
 
         const keyCell = document.createElement('td');
-        const keyWords = key.split(/(?=[A-Z])/);
+        const keyWords = key.split(/(?<=[a-z])(?=[A-Z0-9])/);
         let keyTitle = keyWords.join(' ');
         keyTitle = keyTitle.replace(/\b\w/g, char => char.toUpperCase());
         keyCell.innerText = keyTitle;
         row.appendChild(keyCell);
 
         const valueCell = document.createElement('td');
-        valueCell.innerText = header[key];
+        valueCell.innerText = dataObj[key];
         row.appendChild(valueCell);
     }
+}
+
+const displayHeaderInfo = header => {
+    const headerInfo = document.getElementById('header-content');
+
+    // remove all previous header info
+    while (headerInfo.firstChild) {
+        headerInfo.removeChild(headerInfo.firstChild);
+    }
+
+    // display header info
+    const headerTitle = document.createElement('h2');
+    headerTitle.classList.add('mt-5');
+    headerTitle.innerText = 'Header Information';
+    headerInfo.appendChild(headerTitle);
+
+    // set up a bootstrap table to show the header info
+    createBootstrapTable(headerInfo, header);
+}
+
+const displayTrailerInfo = trailer => {
+    const trailerInfo = document.getElementById('trailer-content');
+
+    // remove all previous trailer info
+    while (trailerInfo.firstChild) {
+        trailerInfo.removeChild(trailerInfo.firstChild);
+    }
+
+    // display trailer info
+    const trailerTitle = document.createElement('h2');
+    trailerTitle.classList.add('mt-5');
+    trailerTitle.innerText = 'Trailer Information';
+    trailerInfo.appendChild(trailerTitle);
+
+    // set up a bootstrap table to show the trailer info
+    createBootstrapTable(trailerInfo, trailer);
 }
 
 const parseMetro2File = fileContent => {
@@ -114,6 +191,7 @@ const parseMetro2File = fileContent => {
     const metro2File = new Metro2File(header, records, trailer);
 
     displayHeaderInfo(metro2File.header);
+    displayTrailerInfo(metro2File.trailer);
 }
 
 const readFileOnInput = (e) => {
