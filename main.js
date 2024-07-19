@@ -6,9 +6,11 @@ let mainWindow;
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 800,
     });
+
+    mainWindow.webContents.openDevTools();
     
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 });
