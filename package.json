@@ -1,0 +1,23 @@
+{
+  "name": "metro2-file-viewer",
+  "version": "1.0.0",
+  "description": "A GUI tool for parsing metro2 files.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaxonadams-lp/metro2-file-viewer.git"
+  },
+  "author": "Jaxon Adams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaxonadams-lp/metro2-file-viewer/issues"
+  },
+  "homepage": "https://github.com/jaxonadams-lp/metro2-file-viewer#readme",
+  "devDependencies": {
+    "electron": "^31.2.1"
+  }
+}
