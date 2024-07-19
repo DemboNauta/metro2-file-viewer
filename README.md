@@ -1,5 +1,7 @@
 # Metro2 File Viewer
 
+![image](https://github.com/user-attachments/assets/8de0be7a-2537-4dcf-a650-206eeef37adc)
+
 ## Description:
 The Metro2 File Viewer is a tool designed to help users view and analyze Metro2 credit reporting files. It provides a user-friendly interface to navigate through the file's data and locate relevant information.
 
