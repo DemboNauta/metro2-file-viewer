@@ -405,6 +405,11 @@ const parseMetro2File = fileContent => {
 
 const readFileOnInput = (e) => {
     const file = e.target.files[0];
+    fileType=file.name.substring(file.name.lastIndexOf('.'))
+    if(fileType!='.metro2'){
+        alert("The file you selected isn't a metro2 file")
+        return false
+    }
     const reader = new FileReader();
 
     reader.onload = () => {
